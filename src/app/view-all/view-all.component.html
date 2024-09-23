@@ -1,0 +1,30 @@
+<br>
+<table class="table custom-table">
+    <thead>
+        <tr>
+            <th>RollNo</th>
+            <th>Name</th>
+            <th>Mark </th>
+            <th>Action </th>
+
+
+        </tr>
+
+    </thead>
+    <tbody>
+
+        <!-- ngFor loop to iterate through users -->
+        <tr *ngFor="let student of students">
+            <div style="display:contents" (click)="student.rollno!==undefined ?viewLaptop(student.rollno):null">
+                <td>{{student.rollno }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.mark }}</td>
+
+                <!-- <td><button (click)="student.rollno!==undefined ?viewLaptop(student.rollno):null">View</button></td> -->
+            </div>
+
+            <td><button (click)="deleteStudent(student.rollno)">Delete</button></td>
+        </tr>
+
+    </tbody>
+    <app-view-laptop  *ngIf="isSelectStudentId" (closeEvent)="closeModalFromParent()"  [rol]="selectStudentId"></app-view-laptop>

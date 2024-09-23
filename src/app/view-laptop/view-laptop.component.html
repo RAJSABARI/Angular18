@@ -1,0 +1,24 @@
+<div class="modal" >
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()"> &times;</span>
+      <h2>Laptop List</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>LaptopName</th>
+                <th>Action</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lap of laptops">
+               <td>{{lap.lno}}</td>
+               <td>{{lap.lname}}</td>
+               <td><button (click)="deleteSpecificLaptop(lap.lno)">Delete</button></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

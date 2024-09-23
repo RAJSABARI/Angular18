@@ -1,0 +1,25 @@
+<body>
+<div class="form-container">
+        <h2>Student Register Form</h2>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name"  [(ngModel)]="newStudent.name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Mark</label>
+            <input type="text" id="phone" name="phone"  [(ngModel)]="newStudent.mark" placeholder="Enter your Mark" required>
+        </div>
+
+      <!-- Laptop Section (for multiple laptops) -->
+  <div *ngFor="let laptop of newStudent.laptops; let i = index" class="form-group">
+    <label for="laptop-{{ i }}" *ngIf="showme">Laptop Name</label>
+    <input type="text" id="laptop-{{ i }}" [(ngModel)]="laptop.lname" name="laptop[]" *ngIf="showme" placeholder="Enter Laptop Name" required>
+  </div>
+<input type="checkbox" [(ngModel)]="showme">AddLaptop
+  <button (click)="addLaptop()" *ngIf="showme">Add Laptop</button>
+        <button type="submit" (click)="submitStudent(newStudent)">Submit</button>
+    </div>
+
+
+</body>
