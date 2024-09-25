@@ -6,17 +6,18 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ViewLaptopComponent } from '../view-laptop/view-laptop.component';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-view-all-laptops',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule, RouterOutlet, HttpClientModule, ViewLaptopComponent],
+  imports: [FormsModule, RouterLink, CommonModule, RouterOutlet, HttpClientModule, ViewLaptopComponent,TableModule],
   templateUrl: './view-all-laptops.component.html',
   styleUrl: './view-all-laptops.component.css',
   providers:[ViewAllLaptopsService,HttpClient]
 })
 export class ViewAllLaptopsComponent {
-  laptop?: Laptop[];
+  laptop: Laptop[]|any;
 
   constructor(private viewAllLaptops:ViewAllLaptopsService){}
 

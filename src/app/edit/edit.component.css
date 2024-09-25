@@ -1,0 +1,92 @@
+/* Base container for the form */
+form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Header styling */
+  p {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Input field styling */
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+  
+  /* Focus effect for input field */
+  input[type="text"]:focus {
+    border-color: #5a67d8;
+    box-shadow: 0 0 10px rgba(90, 103, 216, 0.3);
+  }
+  
+  /* Smooth placeholder styling */
+  input[type="text"]::placeholder {
+    color: #bbb;
+    font-style: italic;
+    transition: color 0.3s;
+  }
+  
+  input[type="text"]:focus::placeholder {
+    color: transparent;
+  }
+  
+  /* Button styling */
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #5a67d8;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 20px;
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    background-color: #434fbb;
+    box-shadow: 0 4px 10px rgba(67, 79, 187, 0.3);
+  }
+  
+  /* Button active effect */
+  button:active {
+    background-color: #373e9a;
+    box-shadow: none;
+    transform: translateY(2px);
+  }
+  
+  /* Responsive form design for mobile */
+  @media (max-width: 600px) {
+    form {
+      padding: 15px;
+      margin: 20px;
+    }
+  
+    input[type="text"],
+    button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  

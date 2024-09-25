@@ -1,55 +1,68 @@
-/* Custom table styles */
-.table.custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 18px;
-    text-align: left;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.table.custom-table thead tr {
-    background-color: #343a40;
-    color: #ffffff;
-    text-align: left;
-    font-weight: bold;
+/* Container to hold the input fields and buttons horizontally */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
-.table.custom-table th,
-.table.custom-table td {
-    padding: 12px 15px;
-}
-
-.table.custom-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.table.custom-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.table.custom-table tbody tr:last-of-type {
-    border-bottom: 2px solid #343a40;
-}
-
-.table.custom-table tbody tr:hover {
-    background-color: #e9ecef;
-    cursor: pointer;
-}
-
-.table.custom-table button {
-    background-color: #dc3545;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
+/* Styling for input fields */
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    font-size: 16px;
+    width: 150px;
+}
+
+/* Styling for labels */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+    color: #333;
+}
+
+/* Styling for buttons */
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.table.custom-table button:hover {
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #004494;
+}
+
+/* Reset Button */
+button:nth-of-type(2) {
+    background-color: #dc3545;
+}
+
+button:nth-of-type(2):hover {
     background-color: #c82333;
+}
+
+button:nth-of-type(2):active {
+    background-color: #bd2130;
 }

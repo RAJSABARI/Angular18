@@ -2,50 +2,65 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { Laptop } from '../model/laptop.model';
 import { ViewAllService } from '../view-all/view-all.service';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-view-laptop',
   standalone: true,
-  imports: [FormsModule,RouterLink,CommonModule,RouterOutlet, HttpClientModule],
+  imports: [FormsModule, RouterLink, CommonModule, RouterOutlet, HttpClientModule, TableModule],
   templateUrl: './view-laptop.component.html',
   styleUrl: './view-laptop.component.css',
-  providers:[ViewAllService,HttpClient]
+  providers: [ViewAllService, HttpClient]
 
 })
 export class ViewLaptopComponent {
-  @Input()rol: number | undefined;
+
+  @Input() rol: number | undefined;
   @Input() isSelectStudentId: boolean = true;
   @Output() closeEvent = new EventEmitter<void>();
-  laptops?: Laptop[] = [];
+  laptops: Laptop[] = [];
+  
+  constructor(private service: ViewAllService, private router: Router) { }
+  showme: boolean=false;
 
-  constructor(private service: ViewAllService) {}
+
+  onInit() {
+    this.submitLaptop();
+   this. filterLaptops()
+ 
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['rol'] && this.rol !== undefined) {
       this.loadlaptop();
+
     }
   }
-  loadlaptop(){
+  loadlaptop() {
     this.service.loadLaptop(this.rol).subscribe({
-      next:(data:any)=>{
-        this.laptops=data;
+      next: (data: any) => {
+        this.laptops = data;
+        this.filteredLaptops=data;
+       //this.filterLaptops=data;
         console.log(data);
+
       }
     })
   }
   closeModal() {
     //this.isSelectStudentId = false;
-    this.closeEvent.emit(); 
+    this.closeEvent.emit();
   }
-  
-  
+
+
   deleteSpecificLaptop(rollno: number | undefined) {
     if (confirm("Are you sure you want to delete this Laptop?")) {
       this.service.deleteLaptop(rollno).subscribe(() => {
         this.laptops = this.laptops?.filter(stu => stu.lno !== rollno);
         alert("Laptop deleted successfully!");
+       this.loadlaptop();
 
       }, error => {
         alert("Error deleting student!");
@@ -54,4 +69,40 @@ export class ViewLaptopComponent {
     }
 
   }
+
+  editspecificLaptop(lno: number | undefined) {
+    this.router.navigate(['/editComponenet', lno]);
+  }
+
+  newLaptop: Laptop = {
+    lno: 0,
+    lname: ''
+  };
+  submitLaptop() {
+    if (this.newLaptop.lname != '') {
+      this.service.addnewLaptop(this.rol, this.newLaptop).subscribe({
+        next: () => {
+          console.log("oK");
+          this.loadlaptop();
+
+        }
+      })
+    }
+
+  }
+
+  filteredLaptops:Laptop[]=[]; // Make a copy of the original data
+  searchTerm: string = '';
+
+  // Function to filter laptops by name
+  filterLaptops() {
+    if (this.searchTerm) {
+      this.filteredLaptops = this.laptops.filter(lap =>
+        lap.lname?.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredLaptops = [...this.laptops];
+    }
+  }
+
 }

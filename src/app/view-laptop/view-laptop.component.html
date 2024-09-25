@@ -1,24 +1,60 @@
-<div class="modal" >
-    <div class="modal-content">
-      <span class="close" (click)="closeModal()"> &times;</span>
-      <h2>Laptop List</h2>
-      <table>
-        <thead>
+<div class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()"> &times;</span>
+    <h2>Laptop List</h2>
+    <div class="form-container">
+
+
+      <input type="checkbox" [(ngModel)]="showme">AddLaptop
+      <input type="text" id="model" [(ngModel)]="newLaptop.lname"  name="model" placeholder="Enter laptop model" *ngIf="showme"
+        required />
+
+      <button (click)="submitLaptop()" *ngIf="showme" >Submit</button>
+    </div>
+
+    <div>
+      <div>
+        <!-- Search Input for filtering laptops by name -->
+        <div class="form-group">
+          <input type="text" pInputText placeholder="Search by laptop name" [(ngModel)]="searchTerm"
+            (input)="filterLaptops()" />
+        </div>
+
+        <!-- Table with Pagination and Search -->
+        <p-table [value]="filteredLaptops" [paginator]="true" [rows]="3">
+          <ng-template pTemplate="header">
             <tr>
-                <th>id</th>
-                <th>LaptopName</th>
-                <th>Action</th>
-                
+              <th>Id</th>
+              <th>Laptop Name</th>
+              <th>Action</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let lap of laptops">
-               <td>{{lap.lno}}</td>
-               <td>{{lap.lname}}</td>
-               <td><button (click)="deleteSpecificLaptop(lap.lno)">Delete</button></td>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-lap>
+            <tr>
+              <td>{{ lap.lno }}</td>
+              <td>{{ lap.lname }}</td>
+              <td>
+                <button (click)="deleteSpecificLaptop(lap.lno)">Delete</button>
+              </td>
+              <td>
+                <button (click)="editspecificLaptop(lap.lno)" class="p-link">Edit</button>
+              </td>
             </tr>
-        </tbody>
-      </table>
+          </ng-template>
+
+          <!-- Footer template to show pagination controls -->
+          <ng-template pTemplate="footer">
+            <tr>
+              <td colspan="3">
+                <!-- Optional footer content -->
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+
     </div>
   </div>
-  
+</div>

@@ -1,30 +1,50 @@
-<br>
-<table class="table custom-table">
-    <thead>
+<div>
+    <div class="form-group">
+        <label for="min-mark">Min Mark</label>
+        <input type="number" id="min-mark" [(ngModel)]="minMark" placeholder="Enter Min Mark" />
+    </div>
+    <div class="form-group">
+        <label for="max-mark">Max Mark</label>
+        <input type="number" id="max-mark" [(ngModel)]="maxMark" placeholder="Enter Max Mark" />
+    </div>
+
+    <!-- Button to Filter Table -->
+    <button (click)="filterTable()">Filter</button>
+    <button (click)="resetTable()">Reset</button>
+</div>
+<div>
+    <div class="form-group">
+        <input type="text" pInputText placeholder="Search by name" [(ngModel)]="searchTerm" (input)="filterStudentss()" />
+      </div>
+    <p-table [value]="filteredStudents" [paginator]="true" [rows]="3" >
+      <ng-template pTemplate="header">
         <tr>
-            <th>RollNo</th>
-            <th>Name</th>
-            <th>Mark </th>
-            <th>Action </th>
-
-
+          <th>RollNo</th>
+          <th>Name</th>
+          <th>Mark</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Action</th>
         </tr>
-
-    </thead>
-    <tbody>
-
-        <!-- ngFor loop to iterate through users -->
-        <tr *ngFor="let student of students">
-            <div style="display:contents" (click)="student.rollno!==undefined ?viewLaptop(student.rollno):null">
-                <td>{{student.rollno }}</td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.mark }}</td>
-
-                <!-- <td><button (click)="student.rollno!==undefined ?viewLaptop(student.rollno):null">View</button></td> -->
-            </div>
-
-            <td><button (click)="deleteStudent(student.rollno)">Delete</button></td>
+      </ng-template>
+  
+      <ng-template pTemplate="body" let-student>
+        <tr style="cursor: pointer;">
+          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.rollno }}</td>
+          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.name }}</td>
+          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.mark }}</td>
+          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.gender }}</td>
+          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.age }}</td>
+          <td>
+            <button (click)="deleteStudent(student.rollno)">Delete</button>
+          </td>
+          <td>
+            <button (click)="editStudent(student.rollno)">Edit</button>
+          </td>
         </tr>
-
-    </tbody>
-    <app-view-laptop  *ngIf="isSelectStudentId" (closeEvent)="closeModalFromParent()"  [rol]="selectStudentId"></app-view-laptop>
+      </ng-template>
+    </p-table>
+  </div>
+  
+    <!-- Laptop View Modal -->
+<app-view-laptop *ngIf="isSelectStudentId" (closeEvent)="closeModalFromParent()" [rol]="selectStudentId"> </app-view-laptop>

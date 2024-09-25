@@ -5,14 +5,15 @@ import { Student } from '../model/student.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AddService {
+export class EditpersonService {
+
+
   private apiUrl='http://localhost:8080/api';
   constructor(private http:HttpClient) { }
-  postStudent(students:Student){
-    return this.http.post(`${this.apiUrl}/post`,students)
-  }
-
-  dropDownLaptop(){
-    return this.http.get(`${this.apiUrl}/getAllLaptops`)
-  }
+getSepecificPerson(rollno:number){
+  return this.http.get(`${this.apiUrl}/studentById/${rollno}`)
+}
+updatespecificPerson(rollno:number|any,student:Student){
+  return this.http.put(`${this.apiUrl}/updatestudent/${rollno}`,student);
+}
 }

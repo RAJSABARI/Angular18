@@ -1,0 +1,32 @@
+<p>editperson works!</p>
+<h2>Student Register Form</h2>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" [(ngModel)]="newPerson.name" name="name" placeholder="Enter your name" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Mark</label>
+      <input type="text" id="phone" name="phone" [(ngModel)]="newPerson.mark" placeholder="Enter your Mark" required>
+    </div>
+    <div>
+      <label>
+        <input type="radio" name="gender" [(ngModel)]="newPerson.gender" value="Male" /> Male
+      </label>
+      <label>
+        <input type="radio" name="gender" [(ngModel)]="newPerson.gender" value="Female" /> Female
+      </label>
+    </div>
+    
+    <div class="form-group">
+      <label for="age">Age</label>
+      <select id="age" [(ngModel)]="newPerson.age" name="age" required>
+        <option value="" disabled selected>Select Age</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+      </select>
+    </div>
+    <button (click)="updateSpecificPerson()">UPDATE</button>
+

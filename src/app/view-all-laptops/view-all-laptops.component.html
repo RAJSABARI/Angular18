@@ -1,15 +1,14 @@
-<table>
-    <thead>
-        <tr id="laptop">
+<p-table [value]="laptop">
+    <ng-template pTemplate="header">
+        <tr>
             <th>LaptopId</th>
             <th>LaptopName</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let laptops of laptop">
-            <td>{{laptops.lno }}</td>
-            <td>{{laptops.lname }}</td>
-            
+    </ng-template>
+    <ng-template pTemplate="body" let-laptop>
+        <tr>
+            <td>{{laptop.lno}}</td>
+            <td>{{laptop.lname}}</td>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+</p-table>
