@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Student } from '../model/student.model';
 import { AddService } from './add.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -10,12 +10,13 @@ import { Laptop } from '../model/laptop.model';
 @Component({
   selector: 'app-add',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule, RouterOutlet, HttpClientModule],
+  imports: [FormsModule, RouterLink, CommonModule, RouterOutlet, HttpClientModule,ReactiveFormsModule],
   templateUrl: './add.component.html',
   styleUrl: './add.component.css',
   providers: [AddService, HttpClient]
 })
 export class AddComponent {
+  forms!:FormGroup;
   constructor(private service: AddService) { }
   
   avaiablelaptops: any[] = [];
@@ -27,9 +28,9 @@ export class AddComponent {
     laptops: [],
     age:0
   };
-  newLaptop: any = {
-    laptops: [],
-  };
+  // newLaptop: any = {
+  //   laptops: [],
+  // };
 
   submitStudent(Student: any) {
     this.service.postStudent(Student)

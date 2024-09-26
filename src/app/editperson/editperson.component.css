@@ -1,0 +1,152 @@
+/* Base styling for the form container */
+.form-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form group */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .form-group input[type="text"],
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input[type="text"]:focus,
+  .form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  }
+  
+  /* Gender radio buttons */
+  div > label {
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: normal;
+    font-size: 16px;
+    cursor: pointer;
+    color: #555;
+  }
+  
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  /* Laptop Section */
+
+  
+  .remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 80%;
+    padding: 0 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .remove-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Add Laptop Button */
+  button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #138496;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button.add-laptop {
+    background-color: #17a2b8;
+  }
+  
+  button.add-laptop:hover {
+    background-color: #138496;
+  }
+  
+  /* Checkbox for adding a laptop */
+  input[type="checkbox"] {
+    margin-top: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  /* Submit button */
+  button[type="submit"] {
+    width: 100%;
+    background-color: #007bff;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Media Queries for Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .form-container {
+      padding: 15px;
+    }
+  
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    button.add-laptop {
+      margin-top: 10px;
+    }
+  
+    .remove-btn {
+      padding: 0 8px;
+      font-size: 14px;
+    }
+  }
+  

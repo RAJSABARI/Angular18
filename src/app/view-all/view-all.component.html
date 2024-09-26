@@ -1,51 +1,70 @@
-<div>
+<div class="container">
     <div class="form-group">
-        <label for="min-mark">Min Mark</label>
+        <label for="min-mark">MIN</label>
         <input type="number" id="min-mark" [(ngModel)]="minMark" placeholder="Enter Min Mark" />
     </div>
     <div class="form-group">
-        <label for="max-mark">Max Mark</label>
+        <label for="max-mark">MAX</label>
         <input type="number" id="max-mark" [(ngModel)]="maxMark" placeholder="Enter Max Mark" />
     </div>
-
-    <!-- Button to Filter Table -->
-    <button (click)="filterTable()">Filter</button>
-    <button (click)="resetTable()">Reset</button>
-    <button (click)="generatePDF()">Generate PDF</button>
+    <div class="button-container">
+        <button (click)="filterTable()" class="icon-button"> <i class="fas fa-filter"></i>
+            <!-- Font Awesome Filter Icon -->
+        </button>
+        <button (click)="resetTable()" class="icon-button"> <i class="fas fa-sync-alt"></i>
+            <!-- Font Awesome Reset Icon -->
+        </button>
+            <button (click)="generatePDF()" class="icon-button">
+                <i class="fas fa-file-pdf"></i>
+            </button>
+            <button (click)="generateExcel()" class="icon-button">
+                <i class="fas fa-file-excel"></i>
+            </button>
+    </div>
 </div>
+
+
 <div>
     <div class="form-group">
-        <input type="text" pInputText placeholder="Search by name" [(ngModel)]="searchTerm" (input)="filterStudentss()" />
-      </div>
-    <p-table [value]="filteredStudents" [paginator]="true" [rows]="3" >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>RollNo</th>
-          <th>Name</th>
-          <th>Mark</th>
-          <th>Gender</th>
-          <th>Age</th>
-          <th>Action</th>
-        </tr>
-      </ng-template>
-  
-      <ng-template pTemplate="body" let-student>
-        <tr style="cursor: pointer;">
-          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.rollno }}</td>
-          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.name }}</td>
-          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.mark }}</td>
-          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.gender }}</td>
-          <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.age }}</td>
-          <td>
-            <button (click)="deleteStudent(student.rollno)">Delete</button>
-          </td>
-          <td>
-            <button (click)="editStudent(student.rollno)">Edit</button>
-          </td>
-        </tr>
-      </ng-template>
+        <input id="sea" type="text" pInputText placeholder="Search by name" [(ngModel)]="searchTerm"
+            (input)="filterStudentss()" />
+    </div>
+    <p-table [value]="filteredStudents" [paginator]="true" [rows]="3">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>NO</th>
+                <th>NAME</th>
+                <th>MARK</th>
+                <th>GENDER</th>
+                <th>AGE</th>
+                <th>EDIT</th>
+                <th>DELETE</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-student>
+            <tr style="cursor: pointer;">
+                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.rollno }}</td>
+                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.name }}</td>
+                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.mark }}</td>
+                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.gender }}</td>
+                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.age }}</td>
+                <td>
+                    <button (click)="editStudent(student.rollno)" class="icon-button">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                </td>
+                <td>
+                    <button (click)="deleteStudent(student.rollno)" class="icon-button">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
     </p-table>
-  </div>
-  
-    <!-- Laptop View Modal -->
-<app-view-laptop *ngIf="isSelectStudentId" (closeEvent)="closeModalFromParent()" [rol]="selectStudentId"> </app-view-laptop>
+</div>
+
+<!-- Laptop View Modal -->
+<app-view-laptop *ngIf="isSelectStudentId" (closeEvent)="closeModalFromParent()" [rol]="selectStudentId">
+</app-view-laptop>

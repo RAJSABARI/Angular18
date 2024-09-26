@@ -7,6 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
 }
 
 /* Container to hold the input fields and buttons horizontally */
@@ -15,15 +16,17 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    
 }
 
 /* Styling for input fields */
 input[type="number"] {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #007bff;
     border-radius: 5px;
     font-size: 16px;
     width: 150px;
+   
 }
 
 /* Styling for labels */
@@ -46,15 +49,16 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
+/* button:hover {
+    background-color: #004494;
+} */
 
 button:active {
     background-color: #004494;
+    
 }
 
-/* Reset Button */
+/* Reset Button
 button:nth-of-type(2) {
     background-color: #dc3545;
 }
@@ -65,4 +69,65 @@ button:nth-of-type(2):hover {
 
 button:nth-of-type(2):active {
     background-color: #bd2130;
+} */
+
+.container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.container button {
+    height: 35px;
+}
+
+.button-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+ 
+   
+}
+
+.downloads {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.down {
+    justify-content: center;
+    display: flex;
+}
+
+#sea {
+    margin-top: 2%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff; 
+}
+
+/* Icon Button Styles (transparent and no hover color) */
+.icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Remove hover effect for PDF and Excel buttons */
+.icon-button:hover {
+    color: #007bff; /* No color change on hover */
+}
+
+.icon-button i {
+    margin-right: 5px;
+}
+.buttonfilter{
+    background-color: transparent;
+    color: #333;
+   
 }

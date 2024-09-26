@@ -1,14 +1,24 @@
-<p-table [value]="laptop">
+<div class="full">
+
+<p-table [value]="laptop" [paginator]="true" [rows]="5" >
     <ng-template pTemplate="header">
         <tr>
-            <th>LaptopId</th>
-            <th>LaptopName</th>
+            <th>ID</th>
+            <th>LAPTOP NAME</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-laptop>
         <tr>
-            <td>{{laptop.lno}}</td>
-            <td>{{laptop.lname}}</td>
+            <td>{{ laptop.lno }}</td>
+            <td>{{ laptop.lname }}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <tr>
+            <td colspan="2">
+                <!-- Optional footer content can go here -->
+            </td>
         </tr>
     </ng-template>
 </p-table>
+</div>

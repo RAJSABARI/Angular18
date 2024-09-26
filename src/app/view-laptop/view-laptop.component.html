@@ -1,15 +1,18 @@
 <div class="modal">
   <div class="modal-content">
     <span class="close" (click)="closeModal()"> &times;</span>
-    <h2>Laptop List</h2>
+    <h3 class="modal-title">LIST</h3>
     <div class="form-container">
 
+      <div class="checkbox-container">
+        <input type="checkbox" [(ngModel)]="showme" id="addLaptopCheckbox">
+        <label for="addLaptopCheckbox">ADD LAPTOP</label>
+      </div>
 
-      <input type="checkbox" [(ngModel)]="showme">AddLaptop
-      <input type="text" id="model" [(ngModel)]="newLaptop.lname"  name="model" placeholder="Enter laptop model" *ngIf="showme"
-        required />
+      <input type="text" id="model" [(ngModel)]="newLaptop.lname" name="model" placeholder="Enter laptop model"
+        *ngIf="showme" required class="input-large" />
 
-      <button (click)="submitLaptop()" *ngIf="showme" >Submit</button>
+      <button (click)="submitLaptop()"  *ngIf="showme" class="submit-button">SAVE</button>
     </div>
 
     <div>
@@ -17,16 +20,17 @@
         <!-- Search Input for filtering laptops by name -->
         <div class="form-group">
           <input type="text" pInputText placeholder="Search by laptop name" [(ngModel)]="searchTerm"
-            (input)="filterLaptops()" />
+            (input)="filterLaptops()" class="input-large" />
         </div>
 
         <!-- Table with Pagination and Search -->
         <p-table [value]="filteredLaptops" [paginator]="true" [rows]="3">
           <ng-template pTemplate="header">
             <tr>
-              <th>Id</th>
-              <th>Laptop Name</th>
-              <th>Action</th>
+              <th>ID</th>
+              <th>LAPTOP NAME</th>
+              <th>DELETE</th>
+              <th>EDIT</th>
             </tr>
           </ng-template>
 
@@ -35,11 +39,16 @@
               <td>{{ lap.lno }}</td>
               <td>{{ lap.lname }}</td>
               <td>
-                <button (click)="deleteSpecificLaptop(lap.lno)">Delete</button>
-              </td>
-              <td>
-                <button (click)="editspecificLaptop(lap.lno)" class="p-link">Edit</button>
-              </td>
+                <button (click)="deleteSpecificLaptop(lap.lno)" class="icon-button">
+                    <i class="fas fa-trash"></i> <!-- Font Awesome Delete Icon -->
+                </button>
+            </td>
+            <td>
+                <button (click)="editspecificLaptop(lap.lno)" class="icon-button">
+                    <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
+                </button>
+            </td>
+            
             </tr>
           </ng-template>
 
@@ -47,14 +56,13 @@
           <ng-template pTemplate="footer">
             <tr>
               <td colspan="3">
+            
                 <!-- Optional footer content -->
               </td>
             </tr>
           </ng-template>
         </p-table>
       </div>
-
-
     </div>
   </div>
 </div>

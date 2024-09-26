@@ -1,56 +1,85 @@
-/* Basic navbar styles */
+/* General styles for the body */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Light background */
+}
+
+/* Navbar styling */
 .navbar {
-    background-color: #333;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-  }
-  
+  background-color: #4A90E2; /* Primary color */
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 15px 20px; /* Padding around navbar */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* Space between brand and nav items */
+  align-items: center; /* Vertically center items */
+}
+
+.navbar-brand {
+  font-size: 24px; /* Larger font size for brand */
+  font-weight: bold;
+  text-decoration: none;
+  color: white; /* Brand color */
+}
+
+/* Navbar items */
+.navbar-nav {
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Display items in a row */
+}
+
+.nav-item {
+  margin-left: 20px; /* Space between items */
+}
+
+.nav-link {
+  text-decoration: none; /* Remove underline from links */
+  color: white; /* Link color */
+  font-size: 16px; /* Link font size */
+  padding: 10px 15px; /* Padding around links */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Hover effect for links */
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly lighten on hover */
+  color: #4A90E2; /* Change color on hover */
+}
+
+/* Active link styling */
+.nav-link.active {
+  background-color: white; /* Active link background */
+  color: #4A90E2; /* Active link color */
+  font-weight: bold; /* Bold active link */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+      flex-direction: column; /* Stack items on small screens */
+      align-items: flex-start; /* Align to the left */
   }
-  
-  .navbar-brand {
-    color: white;
-    font-size: 1.5em;
-    text-decoration: none;
-  }
-  
+
   .navbar-nav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+      flex-direction: column; /* Stack nav items vertically */
+      width: 100%; /* Full width */
   }
-  
+
   .nav-item {
-    margin-left: 20px;
+      margin-left: 0; /* Reset margin for stacked items */
+      width: 100%; /* Full width for each item */
   }
-  
+
   .nav-link {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
+      padding: 10px; /* Padding adjustment */
+      text-align: center; /* Center align text */
   }
-  
-  .nav-link:hover {
-    background-color: #555;
-    border-radius: 5px;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .navbar-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .nav-item {
-      margin-left: 0;
-      margin-top: 10px;
-    }
-  }
-  
+}

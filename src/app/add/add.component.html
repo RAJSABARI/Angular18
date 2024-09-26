@@ -1,26 +1,26 @@
 <body> 
   <div class="form-container">
-    <h2>Student Register Form</h2>
+    <h2> REISTER FORM_</h2>
 
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" [(ngModel)]="newStudent.name" name="name" placeholder="Enter your name" required>
+      <label for="name">NAME</label>
+      <input type="text" id="name" [(ngModel)]="newStudent.name" name="name" placeholder="Enter your name"  required>
     </div>
     <div class="form-group">
-      <label for="phone">Mark</label>
+      <label for="phone">MARK</label>
       <input type="text" id="phone" name="phone" [(ngModel)]="newStudent.mark" placeholder="Enter your Mark" required>
     </div>
     <div>
       <label>
-        <input type="radio" name="gender" [(ngModel)]="newStudent.gender" value="Male" /> Male
+        <input type="radio" name="gender" [(ngModel)]="newStudent.gender" value="Male"  required/> MALE
       </label>
       <label>
-        <input type="radio" name="gender" [(ngModel)]="newStudent.gender" value="Female" /> Female
+        <input type="radio" name="gender" [(ngModel)]="newStudent.gender" value="Female" required /> FEMALE
       </label>
     </div>
     
     <div class="form-group">
-      <label for="age">Age</label>
+      <label for="age">AGE</label>
       <select id="age" [(ngModel)]="newStudent.age" name="age" required>
         <option value="" disabled selected>Select Age</option>
         <option value="15">15</option>
@@ -37,10 +37,10 @@
         placeholder="Enter Laptop Name" required>
       <button (click)="removeLaptop(i)" type="button" class="remove-btn" *ngIf="showme">-</button>
     </div>
-    <input type="checkbox" [(ngModel)]="showme">AddLaptop
+    <input type="checkbox" [(ngModel)]="showme">ADD LAPTOP
 
-    <button (click)="addLaptop()" *ngIf="showme">Add Laptop</button>
+    <button (click)="addLaptop()" *ngIf="showme">ADD LAPTOP</button>
 
-    <button type="submit" (click)="submitStudent(newStudent)">Submit</button>
+    <button type="submit" (click)="submitStudent(newStudent)">SAVE</button>
   </div>
 </body>

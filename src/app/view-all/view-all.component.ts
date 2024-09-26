@@ -11,6 +11,7 @@ import { ViewLaptopComponent } from "../view-laptop/view-laptop.component";
 import { TableModule } from 'primeng/table';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -61,18 +62,18 @@ deleteStudent(rollno: number | undefined) {
   if (confirm("Are you sure you want to delete this student?")) {
     this.service.deleteStudent(rollno).subscribe(() => {
       this.students = this.students?.filter(stu => stu.rollno !== rollno);
-        this.loadAllStudents();
-        alert("Student deleted successfully!");
-
+      this.loadAllStudents();
+      alert("Student deleted successfully!");
+      
       }, error => {
         alert("Error deleting student!");
         console.error(error);
       });
     }
-
+    
   }
   selectStudentId: number | undefined;  //used to store the student id
-
+  
   viewLaptop(rollno: number | undefined) { //used to view the specific laptop with the help of student id
     this.selectStudentId = rollno; 
     this.isSelectStudentId = true; 
@@ -147,4 +148,28 @@ deleteStudent(rollno: number | undefined) {
       doc.save('student-laptop-details.pdf');
   }
 
+  generateExcel() {
+    const data: any[] = [];
+    this.students.forEach(student => {
+      student.laptops.forEach(laptop => {
+        data.push({
+          'Roll No': student.rollno,
+          'Name': student.name,
+          'Mark': student.mark,
+          'Gender': student.gender,
+          'Age': student.age,
+          'Laptop No': laptop.lno,
+          'Laptop Name': laptop.lname
+        });
+      });
+    });
+
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+     // Create a workbook and add the worksheet
+     const wb: XLSX.WorkBook = XLSX.utils.book_new();
+     XLSX.utils.book_append_sheet(wb, ws, 'StudentLaptops');
+ 
+     // Export the workbook to Excel
+     XLSX.writeFile(wb, 'student-laptop-details.xlsx');
+  }
 }
