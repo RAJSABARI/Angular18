@@ -83,7 +83,7 @@
   /* Add Laptop Button */
   button {
     display: inline-block;
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -92,9 +92,9 @@
     font-size: 16px;
     transition: background-color 0.3s;
   }
-  
-  button:hover {
-    background-color: #218838;
+  /* addlaptop */
+  button:hover { 
+    background-color: #0056b3;
   }
   
   button:disabled {
@@ -107,7 +107,8 @@
   }
   
   button.add-laptop:hover {
-    background-color: #138496;
+    background-color: #007bff;
+    
   }
   
   /* Checkbox for adding a laptop */

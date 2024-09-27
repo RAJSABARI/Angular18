@@ -9,6 +9,7 @@ export class AddService {
   private apiUrl='http://localhost:8080/api';
   constructor(private http:HttpClient) { }
   postStudent(students:Student){
+    console.log(students);
     return this.http.post(`${this.apiUrl}/post`,students)
   }
 

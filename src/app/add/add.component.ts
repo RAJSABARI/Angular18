@@ -1,70 +1,94 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Student } from '../model/student.model';
 import { AddService } from './add.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Laptop } from '../model/laptop.model';
 
 @Component({
   selector: 'app-add',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule, RouterOutlet, HttpClientModule,ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './add.component.html',
-  styleUrl: './add.component.css',
+  styleUrls: ['./add.component.css'],
   providers: [AddService, HttpClient]
 })
 export class AddComponent {
-  forms!:FormGroup;
-  constructor(private service: AddService) { }
-  
-  avaiablelaptops: any[] = [];
- 
-
-  newStudent: Student = {
-    name: '', mark: 0,
-    gender:'',
-    laptops: [],
-    age:0
-  };
-  // newLaptop: any = {
-  //   laptops: [],
-  // };
-
-  submitStudent(Student: any) {
-    this.service.postStudent(Student)
-      .subscribe({
-        next: (response) => {
-          console.log('Student added successfully', response);
-          alert('Student added successfully!');
-          // this.getStudents();
-          this.resetForm();
-
-        },
-        error: (error) => {
-          console.error('There was an error!', error);
-          alert('Error adding student!');
-        }
-      });
-  }
-  resetForm() {
-    this.newStudent = {
-      name: '',
-      mark: 0,
-      laptops: [{ lname: '' }]
-      // Clear laptop fields and initialize with one empty laptop field
-    };
-  }
-  addLaptop() {
-    this.newStudent.laptops.push({ lname: '' });
-  }
+  studentForm!: FormGroup;
   showme: boolean = false;
 
+  constructor(private service: AddService, private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.studentForm = this.fb.group({
+      name: ['', Validators.required],
+      mark: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      gender: ['', Validators.required],
+      age: ['', Validators.required],
+      laptops: this.fb.array([]), // FormArray for laptops
+      addLaptop: [false] 
+    });
+  }
+
+  get laptops(): FormArray {
+    return this.studentForm.get('laptops') as FormArray;
+  }
+
+  submitStudent(studentData: any) {
+    // Map laptops from form to the Laptop entities
+    const laptops = studentData.laptops.map((laptopName: string) => {
+      return { lname: laptopName }; // Assuming your Laptop entity has a `lname` field
+    });
+
+    // Create a new student object with mapped laptops
+    const studentToSubmit = {
+      ...studentData,
+      laptops: laptops // Set the mapped laptops
+    };
+
+    this.service.postStudent(studentToSubmit).subscribe({
+      next: (response) => {
+        console.log('Student added successfully', response);
+        alert('Student added successfully!');
+        this.resetForm();
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+        alert('Error adding student!');
+      }
+    });
+  }
+
+  resetForm() {
+    this.studentForm.reset();
+    this.laptops.clear(); // Clear the laptops array
+    this.showme = false;   
+    this.studentForm.get('addLaptop')?.setValue(false); // Reset the checkbox
+  
+  }
+
+  addLaptop() {
+    this.laptops.push(this.fb.control('')); // Add new FormControl to FormArray
+    //when we click addlaptop it push the empty input box
+    // 
+  }
+
   removeLaptop(index: number) {
-    if (this.newStudent.laptops.length > 0) {
-      this.newStudent.laptops.splice(index, 1);
+    if (this.laptops.length > 0) {
+      this.laptops.removeAt(index); // Remove FormControl from FormArray
     }
   }
- 
+
+  toggleLaptopSection(event?: Event) {
+    if (event) {
+      const checkbox = event.target as HTMLInputElement;
+      this.showme = checkbox.checked;
+    } else {
+      this.showme = this.studentForm.get('addLaptop')?.value || false;
+    }
+  
+    if (!this.showme) {
+      this.laptops.clear(); // Clear laptops if section is hidden
+    }
+  }
 }

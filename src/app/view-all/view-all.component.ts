@@ -105,7 +105,7 @@ deleteStudent(rollno: number | undefined) {
     this.minMark = 0;
     this.maxMark = 0;
   }
-  generatePDF() { //generate pdf 
+  generatePDF() { //generate pdf // Install jspdf and jspdf-autotable in Angular
     const doc = new jsPDF();
     doc.setFontSize(18);
     doc.text('Student Details with Laptops', 14, 10);
@@ -148,7 +148,7 @@ deleteStudent(rollno: number | undefined) {
       doc.save('student-laptop-details.pdf');
   }
 
-  generateExcel() {
+  generateExcel() { // Install the xlsx Library
     const data: any[] = [];
     this.students.forEach(student => {
       student.laptops.forEach(laptop => {
