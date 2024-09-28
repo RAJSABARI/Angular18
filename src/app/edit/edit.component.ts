@@ -20,10 +20,12 @@ import { EditService } from './edit.service';
 })
 export class EditComponent {
 
+  isshow:Boolean=true;
   lno!: number;
   newLaptop: Laptop|any = {
     lno: 0,
-    lname:''
+    lname:'',
+    serialno:''
   };
    
 

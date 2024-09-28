@@ -33,7 +33,7 @@ getStudentsByMarks(minMark: number, maxMark: number): Observable<Student[]> {
   return this.http.get<Student[]>(`${this.apiUrl}/filter`, { params });
 }
 
-addnewLaptop(rollno:number|any, laptop: Laptop){
-  return this.http.post(`${this.apiUrl}/createNewLaptopInExisting/${rollno}`, laptop );
+addnewLaptop(id:number|any, laptop: Laptop){
+  return this.http.post(`${this.apiUrl}/createNewLaptopInExisting/${id}`, laptop );
 }
 }

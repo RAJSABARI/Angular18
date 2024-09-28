@@ -1,28 +1,34 @@
-<!-- in old we use [{ngmodel}] to bind single single field and create a method and pass to summit button with the 
- help of click now we use reactiveformmodule with receives the input with the help of formgroup and send to studentform 
- and pass to ngsumit   2)we use form formcontroller because it use to control the form it bind the filed it helpfull for edit method which helps to patch the field easier
--->
- <div class="form-container">
+<div class="form-container">
   <h2>REGISTER FORM</h2>
-  <form [formGroup]="studentForm" (ngSubmit)="submitStudent(studentForm.value)">
-    
+  <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+    <!-- Roll Number Field -->
+    <div class="form-group">
+      <label for="rollnumber">ROLL NUMBER</label>
+      <input type="text" id="rollnumber" formControlName="rollno" placeholder="Enter Roll Number"  appNumberValidationDirectiveDirective />
+      <div *ngIf="studentForm.get('rollno')?.invalid && studentForm.get('rollno')?.touched">
+        <small style="color: red;">EX:IT&#64;11</small>
+      </div>
+    </div>
+
+    <!-- Name Field -->
     <div class="form-group">
       <label for="name">NAME</label>
-      <input type="text" id="name" formControlName="name" placeholder="Enter your name" required /> 
-
+      <input type="text" id="name" formControlName="name" placeholder="Enter your name" required />
       <div *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched">
         <small style="color: red;">*Name is required</small>
       </div>
     </div>
-    
+
+    <!-- Mark Field -->
     <div class="form-group">
       <label for="mark">MARK</label>
-      <input type="text" id="mark" formControlName="mark" placeholder="Enter your Mark" required />
+      <input type="number" id="mark" formControlName="mark" placeholder="Enter your Mark" required />
       <div *ngIf="studentForm.get('mark')?.invalid && studentForm.get('mark')?.touched">
         <small style="color: red;">*Mark is required and should be a number</small>
       </div>
     </div>
 
+    <!-- Gender Field -->
     <div>
       <label>
         <input type="radio" formControlName="gender" value="Male" required /> MALE
@@ -35,6 +41,7 @@
       </div>
     </div>
 
+    <!-- Age Field -->
     <div class="form-group">
       <label for="age">AGE</label>
       <select id="age" formControlName="age" required>
@@ -49,21 +56,27 @@
       </div>
     </div>
 
-    <!-- Laptop Section (for multiple laptops) -->
+    <!-- Laptop Section -->
+    <input type="checkbox" formControlName="addLaptop" (change)="toggleLaptopSection($event)"> ADD LAPTOP
+
     <div *ngIf="showme">
-      <label style="color: black;">LAPTOP NAME</label>
+      <label style="color: black;">LAPTOP DETAILS</label>
       <div formArrayName="laptops">
-        <div *ngFor="let laptop of laptops.controls; let i = index" class="form-group">
-          <input type="text" [formControlName]="i" placeholder="Enter Laptop Name"  />
+        <div *ngFor="let laptop of laptops.controls; let i = index" [formGroupName]="i" class="form-group">
+          <input type="text" formControlName="lname" placeholder="Enter Laptop Name" required />
+          <div *ngIf="laptop.get('lname')?.invalid && laptop.get('lname')?.touched">
+            <small style="color: red;">*Laptop name is required</small>
+          </div>
+          <input type="text" formControlName="serialno" placeholder="Enter Serial Number" required />
+          <div *ngIf="laptop.get('serialno')?.invalid && laptop.get('serialno')?.touched">
+            <small style="color: red;">*Serial number is required</small>
+          </div>
           <button (click)="removeLaptop(i)" type="button" class="remove-btn">-</button>
         </div>
       </div>
       <button (click)="addLaptop()" type="button">ADD LAPTOP</button>
     </div>
-<!-- older we use ngmodel to bind the show now we use toggleLaptop -->
-<input type="checkbox" formControlName="addLaptop" (change)="toggleLaptopSection($event)" > ADD LAPTOP
 
-
-    <button type="submit" [disabled]="studentForm.invalid" >SAVE</button>
+    <button type="submit" [disabled]="studentForm.invalid">SAVE</button>
   </form>
 </div>

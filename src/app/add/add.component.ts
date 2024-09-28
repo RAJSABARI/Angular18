@@ -1,32 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Student } from '../model/student.model';
 import { AddService } from './add.service';
-import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { NumberValidationDirectiveDirectiveDirective } from '../derivative/number-validation-directive-directive.directive';
 
 @Component({
   selector: 'app-add',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
-  providers: [AddService, HttpClient]
+  providers: [AddService, HttpClient],
+  standalone:true,
+  imports:[ReactiveFormsModule,CommonModule,HttpClientModule,NumberValidationDirectiveDirectiveDirective]
 })
-export class AddComponent {
+export class AddComponent implements OnInit {
   studentForm!: FormGroup;
   showme: boolean = false;
 
-  constructor(private service: AddService, private fb: FormBuilder) { }
+  constructor(private service: AddService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
+      rollno: ['', Validators.required],
       name: ['', Validators.required],
-      mark: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      mark: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],  // Number validation
       gender: ['', Validators.required],
       age: ['', Validators.required],
-      laptops: this.fb.array([]), // FormArray for laptops
-      addLaptop: [false] 
+      addLaptop: [false],
+      laptops: this.fb.array([]),  // Laptop array initialized as empty
     });
   }
 
@@ -34,17 +35,26 @@ export class AddComponent {
     return this.studentForm.get('laptops') as FormArray;
   }
 
-  submitStudent(studentData: any) {
-    // Map laptops from form to the Laptop entities
-    const laptops = studentData.laptops.map((laptopName: string) => {
-      return { lname: laptopName }; // Assuming your Laptop entity has a `lname` field
-    });
+  // Function to handle form submission
+  submitStudent() {
+    if (this.studentForm.invalid) {
+      console.log('Form is invalid', this.studentForm.errors);
+      return;
+    }
 
-    // Create a new student object with mapped laptops
+    // Map laptops to the required structure
+    const laptops = this.laptops.controls.map(laptop => ({
+      lname: laptop.get('lname')?.value,
+      serialno: laptop.get('serialno')?.value,
+    }));
+
+    // Create student object
     const studentToSubmit = {
-      ...studentData,
-      laptops: laptops // Set the mapped laptops
+      ...this.studentForm.value,
+      laptops: laptops,
     };
+
+    console.log('Submitting student:', studentToSubmit);
 
     this.service.postStudent(studentToSubmit).subscribe({
       next: (response) => {
@@ -53,32 +63,37 @@ export class AddComponent {
         this.resetForm();
       },
       error: (error) => {
-        console.error('There was an error!', error);
+        console.error('Error adding student!', error);
         alert('Error adding student!');
       }
     });
   }
 
+  // Reset form
   resetForm() {
     this.studentForm.reset();
-    this.laptops.clear(); // Clear the laptops array
-    this.showme = false;   
-    this.studentForm.get('addLaptop')?.setValue(false); // Reset the checkbox
-  
+    this.laptops.clear();
+    this.showme = false;
+    this.studentForm.get('addLaptop')?.setValue(false);  // Uncheck 'Add Laptop' checkbox
   }
 
+  // Add a new laptop FormGroup
   addLaptop() {
-    this.laptops.push(this.fb.control('')); // Add new FormControl to FormArray
-    //when we click addlaptop it push the empty input box
-    // 
+    const laptopGroup = this.fb.group({
+      lname: ['', Validators.required],
+      serialno: ['', Validators.required],
+    });
+    this.laptops.push(laptopGroup);
   }
 
+  // Remove a laptop from the array
   removeLaptop(index: number) {
     if (this.laptops.length > 0) {
-      this.laptops.removeAt(index); // Remove FormControl from FormArray
+      this.laptops.removeAt(index);
     }
   }
 
+  // Toggle laptop section visibility
   toggleLaptopSection(event?: Event) {
     if (event) {
       const checkbox = event.target as HTMLInputElement;
@@ -86,9 +101,9 @@ export class AddComponent {
     } else {
       this.showme = this.studentForm.get('addLaptop')?.value || false;
     }
-  
+
     if (!this.showme) {
-      this.laptops.clear(); // Clear laptops if section is hidden
+      this.laptops.clear();
     }
   }
 }

@@ -2,7 +2,9 @@
     <h2>UPDATE FORM</h2>
   
     <form [formGroup]="updateForm" (ngSubmit)="updateSpecificPerson()">
-  
+     
+ 
+      
       <div class="form-group">
         <label for="name">NAME</label>
         <input type="text" id="name" formControlName="name" placeholder="Enter your name" />
@@ -10,7 +12,13 @@
           <small style="color: red;">Name is required</small>
         </div>
       </div>
-  
+      <div class="form-group">
+        <label for="rollnumber">ROLL NUMBER</label>
+        <input type="text" id="rollnumber" formControlName="rollnumber" placeholder="Enter Roll Number" [readOnly]="isEdit" required />
+        <div *ngIf="updateForm.get('rollnumber')?.invalid && updateForm.get('rollnumber')?.touched">
+          <small style="color: red;">*Roll Number is required and must be unique</small>
+        </div>
+      </div>
       <div class="form-group">
         <label for="mark">MARK</label>
         <input type="text" id="mark" formControlName="mark" placeholder="Enter your Mark" />

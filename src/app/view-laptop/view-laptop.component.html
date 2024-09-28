@@ -9,6 +9,8 @@
         <label for="addLaptopCheckbox">ADD LAPTOP</label>
       </div>
 
+      <input type="text" id="model" [(ngModel)]="newLaptop.serialno" name="model" placeholder="Enter laptop serialno"
+      *ngIf="showme" required class="input-large" />
       <input type="text" id="model" [(ngModel)]="newLaptop.lname" name="model" placeholder="Enter laptop model"
         *ngIf="showme" required class="input-large" />
 
@@ -27,7 +29,7 @@
         <p-table [value]="filteredLaptops" [paginator]="true" [rows]="3">
           <ng-template pTemplate="header">
             <tr>
-              <th>ID</th>
+              <th>SERIALNO</th>
               <th>LAPTOP NAME</th>
               <th>DELETE</th>
               <th>EDIT</th>
@@ -36,7 +38,7 @@
 
           <ng-template pTemplate="body" let-lap>
             <tr>
-              <td>{{ lap.lno }}</td>
+              <td>{{ lap.serialno }}</td>
               <td>{{ lap.lname }}</td>
               <td>
                 <button (click)="deleteSpecificLaptop(lap.lno)" class="icon-button">

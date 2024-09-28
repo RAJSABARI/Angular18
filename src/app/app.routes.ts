@@ -23,7 +23,7 @@ export const routes: Routes = [
         component:EditComponent
     },
     {
-        path:"editpersonComponent/:rollno",
+        path:"editpersonComponent/:id",
         component:EditpersonComponent
     }
     

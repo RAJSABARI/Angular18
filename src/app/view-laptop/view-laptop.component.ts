@@ -6,6 +6,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
+import { Student } from '../model/student.model';
 
 @Component({
   selector: 'app-view-laptop',
@@ -76,7 +77,8 @@ export class ViewLaptopComponent {
 
   newLaptop: Laptop = {
     lno: 0,
-    lname: ''
+    lname: '',
+    serialno: ''
   };
   submitLaptop() {
     if (this.newLaptop.lname != '') {

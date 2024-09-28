@@ -19,10 +19,12 @@ import { EditpersonService } from './editperson.service';
   providers: [EditpersonService, HttpClient]
 })
 export class EditpersonComponent {
-  rollno?: number;
+  id?: number;
+  isEdit:boolean=false;
   updateForm!: FormGroup; 
   newPerson: Student | any = {
-    rollno: 0,
+    id: 0,
+    rollnumber:'',
     mark: 0,
     name: '',
     gender: '',
@@ -38,13 +40,16 @@ export class EditpersonComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.rollno = +params['rollno']; // Get roll number from route
-      this.getPersonDetails(this.rollno);
+      
+      this.id = +params['id']; // Get roll number from route
+      console.log(this.id)
+      this.getPersonDetails(this.id);
     });
 
     // Initialize the form
     this.updateForm = this.fb.group({
       name: ['', Validators.required],
+      rollnumber: ['', Validators.required],
       mark: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       gender: ['', Validators.required],
       age: ['', Validators.required],
@@ -52,21 +57,27 @@ export class EditpersonComponent {
   }
 
   // Fetch specific student details
-  getPersonDetails(rollno: number): void {
-    this.editpersonService.getSepecificPerson(rollno).subscribe({
+  getPersonDetails(id: number): void {
+    this.editpersonService.getSepecificPerson(id).subscribe({
       next: (data) => {
         this.newPerson = data;
+        console.log(data)
 
         // Patch the form with the data
         //it is used to bind in input box it will not have value in updatedform 
+        this.isEdit=true;
         this.updateForm.patchValue({
           name: this.newPerson.name,
           mark: this.newPerson.mark,
           gender: this.newPerson.gender,
-          age: this.newPerson.age
+          age: this.newPerson.age,
+          rollnumber:this.newPerson.rollno,
+          
+        
         });
       }
     });
+    console.log(this.newPerson.rollnumber)
   }
 
  
@@ -80,7 +91,7 @@ export class EditpersonComponent {
             ...this.updateForm.value // New form values
         };
 
-        this.editpersonService.updatespecificPerson(this.rollno, updatedPerson).subscribe({ //here we pass updateperson 
+        this.editpersonService.updatespecificPerson(this.id, updatedPerson).subscribe({ //here we pass updateperson 
             next: (data) => {
                 console.log('Student updated successfully', data);
                 this.router.navigate(['/viewtable']);

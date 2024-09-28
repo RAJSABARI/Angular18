@@ -52,16 +52,17 @@ export class ViewAllComponent {
   loadAllStudents(): void {
     this.service.getStudent().subscribe({
       next:(data:any)=> {
+        console.log(data);
       this.students = data;
       this.filteredStudents = data;
     } // Initialize filteredStudents with all students
   });
 }
 
-deleteStudent(rollno: number | undefined) {
+deleteStudent(id: number | undefined) {
   if (confirm("Are you sure you want to delete this student?")) {
-    this.service.deleteStudent(rollno).subscribe(() => {
-      this.students = this.students?.filter(stu => stu.rollno !== rollno);
+    this.service.deleteStudent(id).subscribe(() => {
+      this.students = this.students?.filter(stu => stu.id !== id);
       this.loadAllStudents();
       alert("Student deleted successfully!");
       
@@ -74,15 +75,16 @@ deleteStudent(rollno: number | undefined) {
   }
   selectStudentId: number | undefined;  //used to store the student id
   
-  viewLaptop(rollno: number | undefined) { //used to view the specific laptop with the help of student id
-    this.selectStudentId = rollno; 
+  viewLaptop(id: number | undefined) { //used to view the specific laptop with the help of student id
+    this.selectStudentId = id; 
     this.isSelectStudentId = true; 
   }
   closeModalFromParent() { //used to close the laptop popup
     this.isSelectStudentId = false;
   }
-  editStudent(rollno: any | undefined) {
-    this.router.navigate(["/editpersonComponent",rollno]);
+  editStudent(id: number | undefined) {
+    console.log(id);
+    this.router.navigate(["/editpersonComponent",id]);
   }
 
   filterTable(): void {  //used to filter the mark and display in table
@@ -111,7 +113,7 @@ deleteStudent(rollno: number | undefined) {
     doc.text('Student Details with Laptops', 14, 10);
     
     const columns = [
-      { header: 'Roll No', dataKey: 'rollno' },
+      { header: 'Roll No', dataKey: 'id' },
       { header: 'Name', dataKey: 'name' },
       { header: 'Mark', dataKey: 'mark' },
       { header: 'Gender', dataKey: 'gender' },
@@ -121,11 +123,11 @@ deleteStudent(rollno: number | undefined) {
     ];
 
 
-    const rows: { rollno: number | undefined; name: string | undefined; mark: number | undefined; gender: string | undefined; age: number | undefined; lno: number | undefined; lname: string | undefined; }[]=[]
+    const rows: { id: number | undefined; name: string | undefined; mark: number | undefined; gender: string | undefined; age: number | undefined; lno: number | undefined; lname: string | undefined; }[]=[]
     this.students.forEach(student => {
       student.laptops.forEach(laptop => {
         rows.push({
-          rollno: student.rollno,
+          id: student.id,
           name: student.name,
           mark: student.mark,
           gender: student.gender,
@@ -153,7 +155,7 @@ deleteStudent(rollno: number | undefined) {
     this.students.forEach(student => {
       student.laptops.forEach(laptop => {
         data.push({
-          'Roll No': student.rollno,
+          'Roll No': student.rollnumber,
           'Name': student.name,
           'Mark': student.mark,
           'Gender': student.gender,

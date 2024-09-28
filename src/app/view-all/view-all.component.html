@@ -30,7 +30,7 @@
     <p-table [value]="filteredStudents" [paginator]="true" [rows]="3">
         <ng-template pTemplate="header">
             <tr>
-                <th>NO</th>
+                <th>ROLLNUMBER</th>
                 <th>NAME</th>
                 <th>MARK</th>
                 <th>GENDER</th>
@@ -42,19 +42,19 @@
 
         <ng-template pTemplate="body" let-student>
             <tr style="cursor: pointer;">
-                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.rollno }}</td>
-                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.name }}</td>
-                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.mark }}</td>
-                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.gender }}</td>
-                <td (click)="student.rollno !== undefined ? viewLaptop(student.rollno) : null">{{ student.age }}</td>
+                <td (click)="student.id !== undefined ? viewLaptop(student.id) : null">{{ student.rollno }}</td>
+                <td (click)="student.id !== undefined ? viewLaptop(student.id) : null">{{ student.name }}</td>
+                <td (click)="student.id !== undefined ? viewLaptop(student.id) : null">{{ student.mark }}</td>
+                <td (click)="student.id !== undefined ? viewLaptop(student.id) : null">{{ student.gender }}</td>
+                <td (click)="student.id !== undefined ? viewLaptop(student.id) : null">{{ student.age }}</td>
                 <td>
-                    <button (click)="editStudent(student.rollno)" class="icon-button">
+                    <button (click)="editStudent(student.id)" class="icon-button">
                         <i class="fas fa-edit"></i>
                     </button>
 
                 </td>
                 <td>
-                    <button (click)="deleteStudent(student.rollno)" class="icon-button">
+                    <button (click)="deleteStudent(student.id)" class="icon-button">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
