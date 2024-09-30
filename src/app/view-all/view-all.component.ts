@@ -113,29 +113,30 @@ deleteStudent(id: number | undefined) {
     doc.text('Student Details with Laptops', 14, 10);
     
     const columns = [
-      { header: 'Roll No', dataKey: 'id' },
+      { header: 'Roll No', dataKey: 'rollnumber' },
       { header: 'Name', dataKey: 'name' },
       { header: 'Mark', dataKey: 'mark' },
       { header: 'Gender', dataKey: 'gender' },
       { header: 'Age', dataKey: 'age' },
-      { header: 'Laptop No', dataKey: 'lno' },
+      { header: 'Laptop SerialNo', dataKey: 'serialno' },
       { header: 'Laptop Name', dataKey: 'lname' }
     ];
 
 
-    const rows: { id: number | undefined; name: string | undefined; mark: number | undefined; gender: string | undefined; age: number | undefined; lno: number | undefined; lname: string | undefined; }[]=[]
+    const rows: { rollnumber: string | undefined; name: string | undefined; mark: number | undefined; gender: string | undefined; age: number | undefined; LaptopSerialno: string | undefined; lname: string | undefined; }[]=[]
     this.students.forEach(student => {
       student.laptops.forEach(laptop => {
         rows.push({
-          id: student.id,
+          rollnumber:student.rollno,
           name: student.name,
           mark: student.mark,
           gender: student.gender,
           age: student.age,
-          lno: laptop.lno,
+          LaptopSerialno: laptop.serialno,
           lname: laptop.lname
         });
       });
+    //  console.log(student.id);
     });
 
 
@@ -155,12 +156,12 @@ deleteStudent(id: number | undefined) {
     this.students.forEach(student => {
       student.laptops.forEach(laptop => {
         data.push({
-          'Roll No': student.rollnumber,
+          'Roll No': student.rollno,
           'Name': student.name,
           'Mark': student.mark,
           'Gender': student.gender,
           'Age': student.age,
-          'Laptop No': laptop.lno,
+          'Laptop No': laptop.serialno,
           'Laptop Name': laptop.lname
         });
       });

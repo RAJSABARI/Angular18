@@ -2,7 +2,7 @@ import { Laptop } from "./laptop.model";
 
 export class Student {
     id: number;
-    rollnumber: string;
+    rollno: string;
     mark: number;
     name: string;
     age: number;
@@ -11,7 +11,7 @@ export class Student {
 
     constructor(
         id: number,
-        rollnumber: string,
+        rollno: string,
         mark: number,
         name: string,
         age: number,
@@ -19,7 +19,7 @@ export class Student {
         laptops: Laptop[] = []  // Initialize laptops as an empty array by default
     ) {
         this.id = id;
-        this.rollnumber = rollnumber;
+        this.rollno = rollno;
         this.mark = mark;
         this.name = name;
         this.age = age;

@@ -10,11 +10,10 @@
       </div>
 
       <input type="text" id="model" [(ngModel)]="newLaptop.serialno" name="model" placeholder="Enter laptop serialno"
-      *ngIf="showme" required class="input-large" />
+        *ngIf="showme" required class="input-large" />
       <input type="text" id="model" [(ngModel)]="newLaptop.lname" name="model" placeholder="Enter laptop model"
         *ngIf="showme" required class="input-large" />
-
-      <button (click)="submitLaptop()"  *ngIf="showme" class="submit-button">SAVE</button>
+      <button (click)="submitLaptop()" *ngIf="showme" class="submit-button">SAVE</button>
     </div>
 
     <div>
@@ -42,15 +41,15 @@
               <td>{{ lap.lname }}</td>
               <td>
                 <button (click)="deleteSpecificLaptop(lap.lno)" class="icon-button">
-                    <i class="fas fa-trash"></i> <!-- Font Awesome Delete Icon -->
+                  <i class="fas fa-trash"></i> <!-- Font Awesome Delete Icon -->
                 </button>
-            </td>
-            <td>
+              </td>
+              <td>
                 <button (click)="editspecificLaptop(lap.lno)" class="icon-button">
-                    <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
+                  <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
                 </button>
-            </td>
-            
+              </td>
+
             </tr>
           </ng-template>
 
@@ -58,7 +57,7 @@
           <ng-template pTemplate="footer">
             <tr>
               <td colspan="3">
-            
+
                 <!-- Optional footer content -->
               </td>
             </tr>

@@ -4,7 +4,7 @@
     <!-- Roll Number Field -->
     <div class="form-group">
       <label for="rollnumber">ROLL NUMBER</label>
-      <input type="text" id="rollnumber" formControlName="rollno" placeholder="Enter Roll Number"  appNumberValidationDirectiveDirective />
+      <input type="text" id="rollnumber" formControlName="rollno" placeholder="Enter Roll Number"   />
       <div *ngIf="studentForm.get('rollno')?.invalid && studentForm.get('rollno')?.touched">
         <small style="color: red;">EX:IT&#64;11</small>
       </div>
