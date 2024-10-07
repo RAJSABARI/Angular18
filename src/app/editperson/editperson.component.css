@@ -149,4 +149,17 @@
       font-size: 14px;
     }
   }
+  .non-editable {
+    cursor: not-allowed;  /* Show 'not allowed' cursor on hover */
+    background-color: #f5f5f5;  /* Optional: gray out the background to indicate it's read-only */
+    border: 1px solid #ccc;
+  }
+  
+  .non-editable:focus {
+    border-color: red; /* Optional: Change border color when trying to focus */
+  }
+  
+  .non-editable:hover {
+    background-color: #e0e0e0; /* Optional: Slightly darker background when hovered */
+  }
   

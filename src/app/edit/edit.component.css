@@ -89,3 +89,16 @@ button:active {
     padding: 10px;
   }
 }
+.serialno-input[readonly] {
+  cursor: not-allowed; /* Show 'not allowed' cursor */
+  background-color: #f5f5f5; /* Optional: Gray out the background to indicate read-only */
+  border: 1px solid #ccc;
+}
+
+.serialno-input[readonly]:hover {
+  background-color: #e0e0e0; /* Slightly darker background on hover */
+}
+
+.serialno-input[readonly]:focus {
+  border-color: red; /* Change border color when focused (if needed) */
+}

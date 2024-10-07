@@ -1,6 +1,8 @@
 <p>EDIT LAPTOP</p>
-<input type="text" [(ngModel)]="newLaptop.serialno" [readOnly]="isshow">
-<input type="text" [(ngModel)]="newLaptop.lname" >
-<button (click)="getlaptop()" >SAVE</button>
+<label for="SERIALNO">SERIALNO</label>
+<input type="text" id="serialno" [(ngModel)]="newLaptop.serialno" [readOnly]="isshow" class="serialno-input" />
 
-  
+<label for="NAME">NAME</label>
+<input type="text" id="name" [(ngModel)]="newLaptop.lname" />
+
+<button (click)="getlaptop()">SAVE</button>

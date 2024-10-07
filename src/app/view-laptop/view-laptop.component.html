@@ -30,8 +30,8 @@
             <tr>
               <th>SERIALNO</th>
               <th>LAPTOP NAME</th>
-              <th>DELETE</th>
               <th>EDIT</th>
+              <th>DELETE</th>
             </tr>
           </ng-template>
 
@@ -40,14 +40,15 @@
               <td>{{ lap.serialno }}</td>
               <td>{{ lap.lname }}</td>
               <td>
-                <button (click)="deleteSpecificLaptop(lap.lno)" class="icon-button">
-                  <i class="fas fa-trash"></i> <!-- Font Awesome Delete Icon -->
-                </button>
-              </td>
-              <td>
                 <button (click)="editspecificLaptop(lap.lno)" class="icon-button">
                   <i class="fas fa-edit"></i> <!-- Font Awesome Edit Icon -->
                 </button>
+              </td>
+              <td>
+                <button (click)="deleteSpecificLaptop(lap.lno)" class="icon-button">
+                  <i class="fas fa-trash"></i> <!-- Font Awesome Delete Icon -->
+                </button>
+               
               </td>
 
             </tr>

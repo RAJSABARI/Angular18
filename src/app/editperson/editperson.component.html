@@ -1,59 +1,59 @@
 <div class="form-container">
-    <h2>UPDATE FORM</h2>
-  
-    <form [formGroup]="updateForm" (ngSubmit)="updateSpecificPerson()">
-     
- 
-      
-      <div class="form-group">
-        <label for="name">NAME</label>
-        <input type="text" id="name" formControlName="name" placeholder="Enter your name" />
-        <div *ngIf="updateForm.get('name')?.invalid && updateForm.get('name')?.touched">
-          <small style="color: red;">Name is required</small>
-        </div>
+  <h2>UPDATE FORM</h2>
+
+  <form [formGroup]="updateForm" (ngSubmit)="updateSpecificPerson()">
+    <div class="form-group">
+      <label for="rollnumber">ROLL NUMBER</label>
+      <input type="text" id="rollnumber" formControlName="rollnumber" placeholder="Enter Roll Number"
+        [readOnly]="isEdit" class="non-editable" required />
+      <div *ngIf="updateForm.get('rollnumber')?.invalid && updateForm.get('rollnumber')?.touched">
+        <small style="color: red;">*Roll Number is required and must be unique</small>
       </div>
-      <div class="form-group">
-        <label for="rollnumber">ROLL NUMBER</label>
-        <input type="text" id="rollnumber" formControlName="rollnumber" placeholder="Enter Roll Number" [readOnly]="isEdit" required />
-        <div *ngIf="updateForm.get('rollnumber')?.invalid && updateForm.get('rollnumber')?.touched">
-          <small style="color: red;">*Roll Number is required and must be unique</small>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="name">NAME</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter your name" />
+      <div *ngIf="updateForm.get('name')?.invalid && updateForm.get('name')?.touched">
+        <small style="color: red;">Name is required</small>
       </div>
-      <div class="form-group">
-        <label for="mark">MARK</label>
-        <input type="text" id="mark" formControlName="mark" placeholder="Enter your Mark" />
-        <div *ngIf="updateForm.get('mark')?.invalid && updateForm.get('mark')?.touched">
-          <small style="color: red;">Mark is required and should be a number</small>
-        </div>
+    </div>
+
+   
+
+    <div class="form-group">
+      <label for="mark">MARK</label>
+      <input type="text" id="mark" formControlName="mark" placeholder="Enter your Mark" />
+      <div *ngIf="updateForm.get('mark')?.invalid && updateForm.get('mark')?.touched">
+        <small style="color: red;">Mark is required and should be a number</small>
       </div>
-  
-      <div>
-        <label>
-          <input type="radio" formControlName="gender" value="Male" /> MALE
-        </label>
-        <label>
-          <input type="radio" formControlName="gender" value="Female" /> FEMALE
-        </label>
-        <div *ngIf="updateForm.get('gender')?.invalid && updateForm.get('gender')?.touched">
-          <small style="color: red;">Gender is required</small>
-        </div>
+    </div>
+
+    <div>
+      <label>
+        <input type="radio" formControlName="gender" value="Male" /> MALE
+      </label>
+      <label>
+        <input type="radio" formControlName="gender" value="Female" /> FEMALE
+      </label>
+      <div *ngIf="updateForm.get('gender')?.invalid && updateForm.get('gender')?.touched">
+        <small style="color: red;">Gender is required</small>
       </div>
-  
-      <div class="form-group">
-        <label for="age">AGE</label>
-        <select id="age" formControlName="age">
-          <option value="" disabled>Select Age</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="18">18</option>
-        </select>
-        <div *ngIf="updateForm.get('age')?.invalid && updateForm.get('age')?.touched">
-          <small style="color: red;">Age is required</small>
-        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="age">AGE</label>
+      <select id="age" formControlName="age">
+        <option value="" disabled>Select Age</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+      </select>
+      <div *ngIf="updateForm.get('age')?.invalid && updateForm.get('age')?.touched">
+        <small style="color: red;">Age is required</small>
       </div>
-  
-      <button type="submit" [disabled]="updateForm.invalid">UPDATE</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <button type="submit" [disabled]="updateForm.invalid">UPDATE</button>
+  </form>
+</div>

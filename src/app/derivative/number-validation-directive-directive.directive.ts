@@ -16,7 +16,7 @@ export class NumberValidationDirectiveDirectiveDirective {
   validate(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
     // Basic email regex pattern
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@\.[a-zA-Z]{2,}$/;
+    const emailPattern =  /^[a-zA-Z]+@[0-9]+$/; //REGREX-RegularExpression
  
     if (value && !emailPattern.test(value)) {
       return { 'emailValidator': true };

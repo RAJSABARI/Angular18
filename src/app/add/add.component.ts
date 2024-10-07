@@ -10,16 +10,17 @@ import { NumberValidationDirectiveDirectiveDirective } from '../derivative/numbe
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
   providers: [AddService, HttpClient],
-  standalone:true,
-  imports:[ReactiveFormsModule,CommonModule,HttpClientModule,NumberValidationDirectiveDirectiveDirective]
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, NumberValidationDirectiveDirectiveDirective]
 })
 export class AddComponent implements OnInit {
   studentForm!: FormGroup;
   showme: boolean = false;
 
-  constructor(private service: AddService, private fb: FormBuilder) {}
+  constructor(private service: AddService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+// when we use frombuilder into component,we use to intilize your form in ngoninit//
+  ngOnInit(): void {  
     this.studentForm = this.fb.group({
       rollno: ['', Validators.required],
       name: ['', Validators.required],

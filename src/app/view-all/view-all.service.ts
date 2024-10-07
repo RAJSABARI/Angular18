@@ -14,9 +14,9 @@ export class ViewAllService {
     return this.http.get(`${this.apiUrl}/getAllStudents`)
   }
   
-  getStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(`${this.apiUrl}/getAllStudents`);
-  }
+  // getStudents(): Observable<Student[]> {
+  //   return this.http.get<Student[]>(`${this.apiUrl}/getAllStudents`);
+  // }
   deleteStudent(id:any){
     return this.http.delete(`${this.apiUrl}/deleteByStudentId/`+id)
   }
